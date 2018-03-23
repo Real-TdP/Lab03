@@ -32,6 +32,40 @@ public class Dictionary {
 		}	
 		return dicty;
 	}
+	public List<String> checkTextDico(List<String> word,String language){
+		s=System.nanoTime();
+		err=0;
+		Nerr.set("ci sono "+err+" errori");
+		List<RichWord> bean = new LinkedList<RichWord>();
+		
+		List<String> dicty=this.loadDictionary(language);
+		List<String> tmpD= new LinkedList<String>(dicty);
+		for(String w:word) {
+			tmpD.clear();
+			tmpD.addAll(dicty);
+			RichWord r = new RichWord(w);
+			bean.add(r);
+			String x = tmpD.get(tmpD.size()/2);
+			while(!tmpD.isEmpty()&&w.compareTo(x)!=0) {
+				x = tmpD.get(tmpD.size()/2);
+				//System.out.println("Parola da cercare: "+r.getInput()+ "risult: "+w.compareTo(x) +"  ricerca dciot: "+tmpD.get(tmpD.size()/2)+"  "+tmpD.size());
+				if(w.compareTo(x)<0)
+					tmpD=tmpD.subList(0,tmpD.size()/2);
+				else if(w.compareTo(x)>0)
+					tmpD=tmpD.subList(tmpD.size()/2+1,tmpD.size());
+			}
+			//System.out.println("la parola anal è "+r.getInput()+"  and "+tmpD.size());
+			if(tmpD.isEmpty()) {
+				err++;
+				Nerr.set("ci sono "+err+" errori");
+			}
+			else
+				r.setCheck(true);
+		}
+		
+		return this.getWord(bean);
+		
+	}
 
 	public List<String> checkText(List<String> word,String language) {
 		s=System.nanoTime();

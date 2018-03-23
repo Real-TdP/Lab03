@@ -78,6 +78,6 @@ public class SpellCheckerController {
     public void setModel(Dictionary model) {
 		this.model = model;
 		err.textProperty().bind(model.NerrProperty());
-		time.textProperty().bind(Bindings.concat("tempo impiegato: "+model.TimProperty()));
+		time.textProperty().bind(Bindings.convert(model.TimProperty()));
 	}
 }
