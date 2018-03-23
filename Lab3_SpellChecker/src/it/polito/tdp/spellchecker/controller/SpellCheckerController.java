@@ -3,6 +3,9 @@ import  it.polito.tdp.spellchecker.model.Dictionary;
 
 import java.net.URL;
 import java.util.*;
+
+import javafx.beans.binding.Bindings;
+import javafx.beans.property.ReadOnlyStringWrapper;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
@@ -43,15 +46,15 @@ public class SpellCheckerController {
 
     @FXML
     void clearTxt(ActionEvent event) {
-    	err.setText("");
-    	time.setText("");
+    	model.setNerr("Ci sono - errori");
     	txtWrong.clear();
     	txtInsert.clear();
-
+    	model.setTim(0);
     }
     
     @FXML
     void spellCheck(ActionEvent event) {
+    	txtWrong.clear();
     	txtInsert.getText().replaceAll("[.,\\/#!$%\\^&\\*;:{}=\\-_`~()\\[\\]]\\\"", "");
     	String[] txt = txtInsert.getText().toLowerCase().split(" ");
     	List<String> wrong =model.checkText(Arrays.asList(txt), lang.getValue());
@@ -74,7 +77,7 @@ public class SpellCheckerController {
     
     public void setModel(Dictionary model) {
 		this.model = model;
-		
-
+		err.textProperty().bind(model.NerrProperty());
+		time.textProperty().bind(Bindings.concat("tempo impiegato: "+model.TimProperty()));
 	}
 }
