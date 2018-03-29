@@ -9,6 +9,7 @@
 <?import javafx.scene.layout.HBox?>
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Text?>
+<?import javafx.scene.text.TextFlow?>
 
 <BorderPane xmlns="http://javafx.com/javafx/9.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="it.polito.tdp.spellchecker.controller.SpellCheckerController">
    <top>
@@ -39,14 +40,29 @@
             <TextArea fx:id="txtWrong" editable="false" />
             <HBox alignment="CENTER_RIGHT" prefHeight="0.0" prefWidth="478.0" spacing="5.0">
                <children>
-                  <Text fx:id="err" fill="#f80000" strokeType="OUTSIDE" strokeWidth="0.0" text="The text contains - errors" />
-                  <Button fx:id="btnClear" mnemonicParsing="false" onAction="#clearTxt" text="Clear Text" />
+                  <TextFlow>
+                     <children>
+                        <Text fill="RED" strokeType="OUTSIDE" strokeWidth="0.0" text="The text contains " />
+                        <Text fx:id="err" fill="#f80000" strokeType="OUTSIDE" strokeWidth="0.0" text="-" />
+                        <Text fill="#fc0000" strokeType="OUTSIDE" strokeWidth="0.0" text=" errors" />
+                     </children>
+                  </TextFlow>
+                  <Button fx:id="btnClear" lineSpacing="3.0" mnemonicParsing="false" onAction="#clearTxt" text="Clear Text" />
                </children>
                <padding>
                   <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
                </padding>
             </HBox>
-            <Text fx:id="time" strokeType="OUTSIDE" strokeWidth="0.0" text="Spell check completed in - seconds" />
+            <TextFlow>
+               <children>
+                  <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Spell check completed in   " />
+                  <Text fx:id="time" strokeType="OUTSIDE" strokeWidth="0.0" text="-" />
+                  <Text strokeType="OUTSIDE" strokeWidth="0.0" text="   second" />
+               </children>
+               <VBox.margin>
+                  <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
+               </VBox.margin>
+            </TextFlow>
          </children>
          <padding>
             <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />

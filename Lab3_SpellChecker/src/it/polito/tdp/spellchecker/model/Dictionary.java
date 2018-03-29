@@ -9,9 +9,8 @@ public class Dictionary {
 	
 	
 	
-	private StringProperty Nerr= new SimpleStringProperty();
+	private IntegerProperty Nerr= new SimpleIntegerProperty();
 	private DoubleProperty Tim = new SimpleDoubleProperty();
-	private int err=0;
 	private double s=0;
 
 	public List<String> loadDictionary(String language) {
@@ -34,8 +33,7 @@ public class Dictionary {
 	}
 	public List<String> checkTextDico(List<String> word,String language){
 		s=System.nanoTime();
-		err=0;
-		Nerr.set("ci sono "+err+" errori");
+		Nerr.set(0);
 		List<RichWord> bean = new LinkedList<RichWord>();
 		
 		List<String> dicty=this.loadDictionary(language);
@@ -56,8 +54,7 @@ public class Dictionary {
 			}
 			//System.out.println("la parola anal è "+r.getInput()+"  and "+tmpD.size());
 			if(tmpD.isEmpty()) {
-				err++;
-				Nerr.set("ci sono "+err+" errori");
+				Nerr.set(Nerr.get()+1);
 			}
 			else
 				r.setCheck(true);
@@ -69,8 +66,7 @@ public class Dictionary {
 
 	public List<String> checkText(List<String> word,String language) {
 		s=System.nanoTime();
-		err=0;
-		Nerr.set("ci sono "+err+" errori");
+		Nerr.set(0);
 		List<RichWord> bean = new LinkedList<RichWord>();
 		
 		List<String> dicty=this.loadDictionary(language);
@@ -80,8 +76,7 @@ public class Dictionary {
 			if(dicty.contains(w))
 				r.setCheck(true);
 			else {
-				err++;
-				Nerr.set("ci sono "+err+" errori");
+				Nerr.set(Nerr.get()+1);
 			}
 				
 		}
@@ -100,17 +95,17 @@ public class Dictionary {
 		return words;
 	}
 
-	public final StringProperty NerrProperty() {
+	public final IntegerProperty NerrProperty() {
 		return this.Nerr;
 	}
 	
 
-	public final String getNerr() {
+	public final Integer getNerr() {
 		return this.NerrProperty().get();
 	}
 	
 
-	public final void setNerr(final String Nerr) {
+	public final void setNerr(final int Nerr) {
 		this.NerrProperty().set(Nerr);
 	}
 

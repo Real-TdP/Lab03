@@ -5,7 +5,6 @@ import java.net.URL;
 import java.util.*;
 
 import javafx.beans.binding.Bindings;
-import javafx.beans.property.ReadOnlyStringWrapper;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
@@ -46,7 +45,7 @@ public class SpellCheckerController {
 
     @FXML
     void clearTxt(ActionEvent event) {
-    	model.setNerr("Ci sono - errori");
+    	model.setNerr(0);
     	txtWrong.clear();
     	txtInsert.clear();
     	model.setTim(0);
@@ -77,7 +76,7 @@ public class SpellCheckerController {
     
     public void setModel(Dictionary model) {
 		this.model = model;
-		err.textProperty().bind(model.NerrProperty());
-		time.textProperty().bind(Bindings.convert(model.TimProperty()));
+		err.textProperty().bind(Bindings.convert(model.NerrProperty()));
+		time.textProperty().bind(Bindings.concat(Bindings.convert(model.TimProperty())));  // Bindings.convert(model.TimProperty())
 	}
 }
